@@ -1,0 +1,38 @@
+{
+  "name": "metaphor",
+  "version": "1.0.0",
+  "description": "Web app behavior profiling",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tulsa/metaphor.git"
+  },
+  "keywords": [
+    "scraping",
+    "crawler",
+    "onboarding"
+  ],
+  "author": "Fabric API, Inc <'support@fabricapi.com'>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tulsa/metaphor/issues"
+  },
+  "homepage": "https://github.com/tulsa/metaphor#readme",
+  "devDependencies": {
+    "dotenv": "^1.2.0",
+    "jest-cli": "^0.6.1"
+  },
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "hapi": "^11.0.2",
+    "joi": "^6.9.1",
+    "mongoose": "^4.2.3",
+    "phantom": "^0.8.0",
+    "request": "^2.65.0"
+  }
+}
