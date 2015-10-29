@@ -5,21 +5,20 @@ require('dotenv').load();
 var Hapi = require('hapi');
 var server = new Hapi.Server();
 var Mongoose    = require('mongoose');
+var config = require('./config');
 
-server.connection({
-    host: process.env.HOST || 'localhost',
-    port: process.env.PORT || '8000'
-});
+
+server.connection(config.server);
 
 // MongoDB Connection
-Mongoose.connect('mongodb://localhost/' + process.env.DB_NAME);
+Mongoose.connect(config.mongo.host + config.mongo.name);
+var db = Mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(callback){console.log('MongoDB running at: '
+    + config.mongo.host + '' + config.mongo.name)});
 
-// Adding the entrypoint
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: require('./metaphor/core')()
-});
+// Adding the routes
+server.route(require('./metaphor/routes'));
 
 
 // Start the server

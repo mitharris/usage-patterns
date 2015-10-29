@@ -29,10 +29,13 @@
   },
   "dependencies": {
     "cheerio": "^0.19.0",
+    "gridfs-stream": "^1.1.1",
     "hapi": "^11.0.2",
+    "hoek": "^2.16.3",
     "joi": "^6.9.1",
     "mongoose": "^4.2.3",
     "phantom": "^0.8.0",
-    "request": "^2.65.0"
+    "request": "^2.65.0",
+    "webshot": "git+https://github.com/brenden/node-webshot.git"
   }
 }
