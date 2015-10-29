@@ -1,12 +1,10 @@
 var mongoose  = require('mongoose');
 var Address = require('../models');
-var parse = require('./parser');
+var parse = require('../parser');
 
 
-function create (path){
+function create (params){
     // create it baby
-    var schema = {};
-    schema.id = scrape(path);
     head.name = path;
     var created = new Address({ name: 'Silence' });
     created.save();
@@ -14,20 +12,26 @@ function create (path){
 
 module.exports = function (request, reply){
 
-    // Convert the user submitted URL into an object
+    // 1. Convert the user submitted URL into an object
     var obj = parse.parse(request.params.uri);
 
     // Figure out if the document currently exists
     var query = Address.where({ _id: obj.path});
     query.findOne(function(err, address) {
 
-        // If the document doesnt exist create one
+        // 2. If the document doesnt exist create one
         if (err) {
-            var params = {};
-            params.basic = parse.basic(obj.path);
             // Create the object
+            var params = {};
+            var html = parse.html(obj.path);
+
+            params.basic = parse.basic(html);
+            params.twitter = parse.twitter(html);
+            params.opengraph = parse.opengraph(html);
+            create(params);
+
             // Return the saved object
-            reply(address);
+            reply(params);
         };
 
         // If the document does exit then return the document

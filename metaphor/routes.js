@@ -1,4 +1,4 @@
-var request = require('./handlers/get');
+
 
 module.exports = [
     {
@@ -15,8 +15,8 @@ module.exports = [
         method: 'GET',
         path: '/api/v1/address/{uri}',
         config: {
-            handler: request.get,
-            validate: require('./handlers/validate'),
+            handler: require('./handlers/get'),
+            validate: require('./validate'),
             description: 'Get the website document or create it.',
             notes: 'The host attribute on the uri parameter',
             tags: ['queryset', 'get method', 'get or create methods']

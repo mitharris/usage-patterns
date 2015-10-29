@@ -11,9 +11,18 @@ components.parse = function (uri){
     return obj.path
 };
 
-components.basic = request(url, function(err, response, html){
-    if(!error){
-        var $ = cheerio.load(html);
+components.html = function(uri){
+    request(uri, function(error, response, html){
+        if(!error){
+            // load the page html into the $ element
+            var $ = cheerio.load(html);
+            return $;
+        };
+    });
+};
+
+components.basic = function($){
+
         var head = {};
 
         head.title = $("head title").text();
@@ -68,16 +77,14 @@ components.basic = request(url, function(err, response, html){
         };
 
         // Setting the reply-to attribute
-        function reply(){
+        function replyTo(){
             var email = $('meta[name=reply-to]').attr("content");
             head.meta.repyto = email;
         };
+    return head;
+};
 
-
-    };
-});
-
-components.twitter = function (){
+components.twitter = function ($){
     var meta = {
             summary: '',
             username: '',
@@ -109,7 +116,7 @@ components.twitter = function (){
     return meta;
 };
 
-components.opengraph = function (){
+components.opengraph = function ($){
     var meta = {
             title: '',
             type: '',

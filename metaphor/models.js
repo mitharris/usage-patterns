@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = Mongoose.Schema;
+var Schema = mongoose.Schema;
 
 
 
@@ -27,13 +27,13 @@ var AddressSchema = new Schema({
     potentialAction: {},
 });
 
-AddressSchema.methods = {
-    _id: function(path){
-        return path;
-    },
-    setScreenshot: Queryset.get,
-    setPotentialAction: Queryset.create,
-};
+//AddressSchema.methods = {
+//    _id: function(path){
+//        return path;
+//    },
+//    setScreenshot: Queryset.get,
+//    setPotentialAction: Queryset.create,
+//};
 
 module.exports = mongoose.model('Address', AddressSchema);
 
